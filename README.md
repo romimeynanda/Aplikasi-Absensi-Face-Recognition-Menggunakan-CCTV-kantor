@@ -1,17 +1,29 @@
-# Aplikasi Absensi Face Recognition
+<div align="center">
 
-Aplikasi absensi berbasis website dengan teknologi face recognition menggunakan CCTV kantor.
+# 📸 Aplikasi Absensi Face Recognition
 
-## Fitur Utama
+Sistem absensi modern berbasis website dengan teknologi face recognition yang memanfaatkan CCTV kantor untuk pencatatan kehadiran otomatis.
 
-### 1. Dashboard Utama (/)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=flat-square&logo=prisma)](https://www.prisma.io/)
+[![Socket.io](https://img.shields.io/badge/Socket.io-real--time-010101?style=flat-square&logo=socket.io)](https://socket.io/)
+
+</div>
+
+---
+
+## ✨ Fitur Utama
+
+### 📊 Dashboard Utama (`/`)
 - **Real-time Attendance**: Menampilkan daftar karyawan yang hadir secara real-time
 - **CCTV Monitor**: Menampilkan status dan lokasi CCTV yang aktif
 - **Attendance List**: Daftar lengkap kehadiran hari ini dengan jam masuk dan pulang
 - **Statistics**: Jumlah karyawan hadir, pulang, dan belum hadir
 
-### 2. Admin Panel (/admin)
-- **Data Karyawan**: 
+### ⚙️ Admin Panel (`/admin`)
+- **Data Karyawan**:
   - Tambah, edit, dan hapus data karyawan
   - Upload foto wajah untuk face recognition
   - Management status aktif/non-aktif
@@ -21,7 +33,7 @@ Aplikasi absensi berbasis website dengan teknologi face recognition menggunakan 
   - Management status aktif/non-aktif
 - **Setup Sample Data**: Tombol untuk membuat data contoh
 
-## Cara Penggunaan
+## 🚀 Cara Penggunaan
 
 ### 1. Setup Awal
 1. Buka halaman `/admin`
@@ -47,27 +59,27 @@ Aplikasi absensi berbasis website dengan teknologi face recognition menggunakan 
 - **Face Recognition**: Sistem akan otomatis mendeteksi wajah karyawan melalui CCTV
 - **Pencegahan Duplikasi**: Karyawan yang sudah absen tidak akan dideteksi lagi hari itu
 
-## Teknologi yang Digunakan
+## 🛠️ Teknologi yang Digunakan
 
 ### Frontend
-- Next.js 15 dengan App Router
-- TypeScript 5
-- Tailwind CSS 4
-- shadcn/ui components
-- Lucide icons
+- ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js) dengan App Router
+- ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
+- ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?style=flat-square&logo=tailwind-css)
+- ![shadcn/ui](https://img.shields.io/badge/shadcn/ui-components-000000?style=flat-square)
+- ![Lucide](https://img.shields.io/badge/Lucide-icons-8B5CF6?style=flat-square&logo=lucide)
 
 ### Backend
-- Next.js API Routes
-- Prisma ORM dengan SQLite
-- ZAI Web Dev SDK untuk face recognition
-- Socket.io untuk real-time communication
+- ![Next.js](https://img.shields.io/badge/Next.js-API%20Routes-black?style=flat-square&logo=next.js)
+- ![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=flat-square&logo=prisma) dengan SQLite
+- ![ZAI](https://img.shields.io/badge/ZAI-Web%20Dev%20SDK-FF6B6B?style=flat-square) untuk face recognition
+- ![Socket.io](https://img.shields.io/badge/Socket.io-real--time-010101?style=flat-square&logo=socket.io)
 
-### Database Schema
+## 📊 Database Schema
 - **Karyawan**: Data karyawan dengan foto wajah
 - **CCTV**: Data konfigurasi CCTV
 - **Absensi**: Record kehadiran dengan confidence score
 
-## API Endpoints
+## 🔌 API Endpoints
 
 ### Karyawan
 - `GET /api/karyawan` - Get all employees
@@ -92,7 +104,7 @@ Aplikasi absensi berbasis website dengan teknologi face recognition menggunakan 
 ### Setup
 - `POST /api/setup-sample-data` - Create sample data
 
-## WebSocket Events
+## 🔄 WebSocket Events
 
 ### Client to Server
 - `face-detected` - Send face detection data
@@ -103,8 +115,7 @@ Aplikasi absensi berbasis website dengan teknologi face recognition menggunakan 
 - `attendance-update` - Real-time attendance updates
 - `cctv-status-update` - CCTV status updates
 
-## Cara Kerja Face Recognition
-
+## 🧠 Cara Kerja Face Recognition
 1. **Detection**: CCTV mendeteksi wajah seseorang
 2. **Comparison**: Sistem membandingkan wajah dengan database karyawan
 3. **Recognition**: Jika confidence > 0.7, wajah dianggap cocok
@@ -112,30 +123,36 @@ Aplikasi absensi berbasis website dengan teknologi face recognition menggunakan 
 5. **Recording**: Jika belum, buat record absensi baru
 6. **Notification**: Broadcast update ke semua client
 
-## Security Features
-
+## 🔒 Security Features
 - **Face Recognition Threshold**: Minimum 70% confidence
 - **Duplicate Prevention**: Cek absensi harian
 - **Data Validation**: Input validation di semua forms
 - **Error Handling**: Comprehensive error handling
 
-## Future Enhancements
+## 🚀 Future Enhancements
+- [ ] Integration dengan CCTV IP Camera real
+- [ ] Mobile app untuk karyawan
+- [ ] Laporan dan analytics
+- [ ] Export data ke Excel/PDF
+- [ ] Multi-location support
+- [ ] Shift management
+- [ ] Leave management integration
 
-- Integration dengan CCTV IP Camera real
-- Mobile app untuk karyawan
-- Laporan dan analytics
-- Export data ke Excel/PDF
-- Multi-location support
-- Shift management
-- Leave management integration
-
-## Troubleshooting
+## 🔧 Troubleshooting
 
 ### Common Issues
-1. **Face Recognition Not Working**: Pastikan foto wajah karyawan sudah diupload
-2. **CCTV Not Connected**: Cek IP, port, dan kredensial CCTV
-3. **Duplicate Attendance**: Sistem otomatis mencegah duplikasi harian
-4. **Slow Performance**: Optimasi database queries dan image processing
+- **Face Recognition Not Working**: Pastikan foto wajah karyawan sudah diupload
+- **CCTV Not Connected**: Cek IP, port, dan kredensial CCTV
+- **Duplicate Attendance**: Sistem otomatis mencegah duplikasi harian
+- **Slow Performance**: Optimasi database queries dan image processing
 
 ### Logs
 Cek file `dev.log` untuk detailed error messages dan debugging information.
+
+---
+
+<div align="center">
+
+Made with ❤️ using Next.js & Face Recognition Technology
+
+</div>
