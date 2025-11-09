@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Karyawan {
+  id           String   @id @default(cuid())
+  nik          String   @unique
+  nama         String
+  email        String   @unique
+  jabatan      String
+  departemen   String
+  fotoWajah    String?  // base64 encoded face image
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  absensi      Absensi[]
+}
+
+model CCTV {
+  id           String   @id @default(cuid())
+  nama         String
+  lokasi       String
+  ip           String   @unique
+  port         Int
+  username     String?
+  password     String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  absensi      Absensi[]
+}
+
+model Absensi {
+  id           String   @id @default(cuid())
+  karyawanId   String
+  cctvId       String
+  tipeAbsen    String   // "masuk" atau "pulang"
+  waktuAbsen   DateTime @default(now())
+  confidence   Float    // face recognition confidence score
+  fotoAbsen    String?  // base64 encoded photo when attendance recorded
+  isVerified   Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  
+  karyawan     Karyawan @relation(fields: [karyawanId], references: [id])
+  cctv         CCTV     @relation(fields: [cctvId], references: [id])
+  
+  @@unique([karyawanId, tipeAbsen, waktuAbsen])
+}
