@@ -2,11 +2,10 @@
 # Based on Analysis by AI
 #
 # Changes:
-# 1. PCC Classifier changed to "both-addresses" for better compatibility (Banking/SSL/Cloudflare Tunnel).
+# 1. PCC Classifier changed to "both-addresses" for better compatibility (Banking/SSL) and Active-Active Cloudflare Tunnel.
 # 2. Added Input/Output Mangle rules for correct Router traffic (Ping/DNS/VPN) handling.
 # 3. Upgraded Queue Type from PCQ to CAKE (Smart Queue Management).
 # 4. Optimized Failover Scripts (Removed aggressive connection clearing on UP).
-# 5. Added Bypass PCC Rule for Server (Cloudflare Tunnel stability).
 #
 /interface bridge
 add comment="Bridge untuk LAN Port 3-5" name=bridge-lan
@@ -115,10 +114,8 @@ add action=accept chain=prerouting comment=0_Bypass_Traffic_Lokal dst-address-li
 add action=add-dst-to-address-list address-list=WEBSITE_SENSITIF address-list-timeout=1d chain=prerouting comment=1_Auto_Detect_TLS_Optimized connection-state=new dst-address-list=!LOKAL dst-port=443 in-interface=bridge-lan protocol=tcp tls-host=".*\\.(go|co|ac|sch)\\.id\$"
 add action=mark-connection chain=prerouting comment=2_Sticky_Sensitif_ISP1_Main dst-address-list=WEBSITE_SENSITIF in-interface=bridge-lan new-connection-mark=ISP1_conn
 
-# ADDED: Force Server via ISP1 for Cloudflare Tunnel Stability
-add action=mark-connection chain=prerouting comment="FORCE_Server_ISP1_Main" in-interface=bridge-lan new-connection-mark=ISP1_conn passthrough=yes src-address=10.10.10.20
-
-# CHANGED: PCC Classifier to "both-addresses" for stability
+# CHANGED: PCC Classifier to "both-addresses" for stability & Active-Active Tunnel
+# Removed FORCE_Server_ISP1 rule to allow Natural Load Balancing for Cloudflare Tunnel
 add action=mark-connection chain=prerouting comment=3_PCC_ISP1_300Mbps_slot0 connection-mark=no-mark connection-state=new in-interface=bridge-lan new-connection-mark=ISP1_conn per-connection-classifier=both-addresses:11/0
 add action=mark-connection chain=prerouting comment=3_PCC_ISP1_300Mbps_slot1 connection-mark=no-mark connection-state=new in-interface=bridge-lan new-connection-mark=ISP1_conn per-connection-classifier=both-addresses:11/1
 add action=mark-connection chain=prerouting comment=3_PCC_ISP1_300Mbps_slot2 connection-mark=no-mark connection-state=new in-interface=bridge-lan new-connection-mark=ISP1_conn per-connection-classifier=both-addresses:11/2
